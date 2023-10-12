@@ -1,3 +1,14 @@
-from django.shortcuts import render
+from rest_framework import generics,status
+from rest_framework.response import Response
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authtoken.models import Token
+from .models import *
+from .serializers import *
 
-# Create your views here.
+class CustomUserRegistrationView(generics.CreateAPIView):
+    queryset=CustomUser.objects.all()
+    serializer_class=CustomUserRegistrationSerializer
+
+class CustomUserLoginView(ObtainAuthToken):
+    serializer_class=CustomUserLoginSerialier
+
